@@ -2,7 +2,7 @@
 
 Introduction
 ============
-This repository contains a Windows Runtime Component that wraps up [libwebp] and allows to decode static and animated WEBP images. Wrapper code is mostly based on Facebook's [Fresco] library for Android.
+This repository contains a Windows Runtime Component that wraps up [libwebp] and allows to decode static and animated WEBP images.
 
 The code is released under the MIT/X11, so feel free to modify and share your changes with the world.
 
@@ -22,6 +22,5 @@ You can install the library via [NuGet].
 ###Install-Package [Universal.WebP]
 
 [libwebp]:https://developers.google.com/speed/webp/
-[Fresco]:https://github.com/facebook/fresco/blob/master/imagepipeline/src/main/jni/webpimage/webp.cpp
 [NuGet]:http://nuget.org/
 [Universal.WebP]:http://www.nuget.org/packages/Universal.WebP
