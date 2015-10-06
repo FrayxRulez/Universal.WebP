@@ -59,8 +59,10 @@ WebPImage^ WebPImage::CreateFromByteArray(const Array<uint8> ^bytes)
 			frame->height = iter.height;
 			frame->disposeToBackgroundColor = iter.dispose_method == WEBP_MUX_DISPOSE_BACKGROUND;
 			frame->blendWithPreviousFrame = iter.blend_method == WEBP_MUX_BLEND;
-			frame->pPayload = iter.fragment.bytes;
+			frame->pPayload = std::make_unique<uint8_t[]>(iter.fragment.size);
 			frame->payloadSize = iter.fragment.size;
+
+			CopyMemory(frame->pPayload.get(), iter.fragment.bytes, iter.fragment.size);
 
 			frames.push_back(frame);
 

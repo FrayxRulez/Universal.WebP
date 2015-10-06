@@ -1,5 +1,5 @@
 #pragma once
-
+#include <memory>
 #include <webp\decode.h>
 #include <webp\demux.h>
 
@@ -28,7 +28,7 @@ namespace Universal
 			bool disposeToBackgroundColor;
 			bool blendWithPreviousFrame;
 
-			const uint8_t* pPayload;
+			std::unique_ptr<uint8_t[]> pPayload;
 			size_t payloadSize;
 
 			static uint8_t* GetPointerToPixelData(IBuffer^ pixelBuffer, unsigned int *length);
