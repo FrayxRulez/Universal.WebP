@@ -13,7 +13,7 @@ You can use `WebPImage.DecodeFromByteArray` method to get a `WriteableBitmap` di
 If you want to decode an animated WEBP (or you need to decode both) you can use instead `WebPImage.CreateFromByteArray`.
 This method returns a reference to a `WebPImage` object instance that exposes an array of `WebPFrame`s via its `Frames` property. 
 
-You can simply loop frames and get a `WriteableBitmap` from everyone using `RenderFrame` method.
+You can simply loop the collection and get a `WriteableBitmap` from every frame using its `RenderFrame` method.
 
 Install
 =======
