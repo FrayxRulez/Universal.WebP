@@ -22,7 +22,8 @@ WriteableBitmap^ WebPFrame::RenderFrame()
 		throw ref new FailureException(ref new String(L"WebPInitDecoderConfig failed"));
 	}
 
-	const uint8_t* pPayload = this->pPayload.get();
+	//const uint8_t* pPayload = this->pPayload.get();
+	const uint8_t* pPayload = this->pPayload;
 	size_t payloadSize = this->payloadSize;
 
 	ret = (WebPGetFeatures(pPayload, payloadSize, &config.input) == VP8_STATUS_OK);

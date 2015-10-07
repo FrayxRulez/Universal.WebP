@@ -1,7 +1,5 @@
 #pragma once
 
-#include <webp\decode.h>
-#include <webp\demux.h>
 #include "WebPFrame.h"
 
 using namespace Platform;
@@ -19,6 +17,8 @@ namespace Universal
 		{
 		internal:
 			WebPImage();
+
+			std::shared_ptr<WebPDemuxerWrapper> spDemuxer;
 
 		private:
 			int pixelWidth;

@@ -52,6 +52,7 @@ WebPImage^ WebPImage::CreateFromByteArray(const Array<uint8> ^bytes)
 
 			WebPFrame^ frame = ref new WebPFrame();
 
+			frame->spDemuxer = image->spDemuxer;
 			frame->frameNum = iter.frame_num;
 			frame->offset = Point(static_cast<float>(iter.x_offset), static_cast<float>(iter.y_offset));
 			frame->duration = iter.duration;
@@ -59,10 +60,11 @@ WebPImage^ WebPImage::CreateFromByteArray(const Array<uint8> ^bytes)
 			frame->height = iter.height;
 			frame->disposeToBackgroundColor = iter.dispose_method == WEBP_MUX_DISPOSE_BACKGROUND;
 			frame->blendWithPreviousFrame = iter.blend_method == WEBP_MUX_BLEND;
-			frame->pPayload = std::make_unique<uint8_t[]>(iter.fragment.size);
+			//frame->pPayload = std::make_unique<uint8_t[]>(iter.fragment.size);
+			frame->pPayload = iter.fragment.bytes;
 			frame->payloadSize = iter.fragment.size;
 
-			CopyMemory(frame->pPayload.get(), iter.fragment.bytes, iter.fragment.size);
+			//CopyMemory(frame->pPayload.get(), iter.fragment.bytes, iter.fragment.size);
 
 			frames.push_back(frame);
 
@@ -74,6 +76,7 @@ WebPImage^ WebPImage::CreateFromByteArray(const Array<uint8> ^bytes)
 	image->totalDuration = durationMs;
 	//spNativeContext->frameDurationsMs = ref new Array<int>(frameDurationsMs.data(), frameDurationsMs.size());
 	image->frames = ref new Array<WebPFrame^>(frames.data(), frames.size());
+	image->spDemuxer = std::shared_ptr<WebPDemuxerWrapper>(new WebPDemuxerWrapper(std::move(spDemuxer), std::move(vBuffer)));
 
 	return image;
 }

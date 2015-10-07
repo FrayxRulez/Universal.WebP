@@ -1,7 +1,4 @@
 #pragma once
-#include <memory>
-#include <webp\decode.h>
-#include <webp\demux.h>
 
 using namespace Platform;
 using namespace Windows::Storage;
@@ -20,6 +17,8 @@ namespace Universal
 		internal:
 			WebPFrame();
 
+			std::shared_ptr<WebPDemuxerWrapper> spDemuxer;
+
 			int frameNum;
 			Point offset;
 			int duration;
@@ -28,7 +27,8 @@ namespace Universal
 			bool disposeToBackgroundColor;
 			bool blendWithPreviousFrame;
 
-			std::unique_ptr<uint8_t[]> pPayload;
+			//std::unique_ptr<uint8_t[]> pPayload;
+			const uint8_t* pPayload;
 			size_t payloadSize;
 
 			static uint8_t* GetPointerToPixelData(IBuffer^ pixelBuffer, unsigned int *length);
